@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="start" type="Application" factoryName="Application">
+    <envs>
+      <env name="DATABASE_USERNAME" value="root" />
+      <env name="DATABASE_PASSWORD" value="Mkgrad2020@" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="dev.mohdsummers.dallasmuslimhub.Application" />
+    <module name="dallasmuslimhub" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

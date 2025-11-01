@@ -1,0 +1,60 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.business-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 1rem;
+    width: 300px;
+    transition: transform 0.2s;
+}
+
+.business-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    margin-bottom: 1rem;
+}
+
+.card-title {
+    margin: 0;
+    color: #4CAF50;
+}
+
+
+
+.card-category {
+    margin: 0.5rem 0;
+    color: var(--lumo-secondary-text-color);
+}
+
+.card-description {
+    margin-bottom: 1rem;
+}
+
+.card-address {
+    color: var(--lumo-secondary-text-color);
+    font-size: 0.9em;
+}
+
+.card-actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.card-actions vaadin-button {
+    color: #4CAF50;
+    font-weight: 500;
+}
+
+.card-actions vaadin-button:hover {
+    background-color: rgba(76, 175, 80, 0.1);
+}
