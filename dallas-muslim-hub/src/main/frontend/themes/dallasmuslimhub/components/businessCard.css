@@ -57,13 +57,7 @@
     margin-bottom: 1rem;
 }
 
-.card-address {
-    margin: 0;
-/*
-    padding-left: 1.5rem;
-*/
-    font-size: 0.9em;
-}
+
 
 .card-actions {
     margin-top: 1rem;
@@ -80,14 +74,10 @@
     background-color: rgba(76, 175, 80, 0.1);
 }
 
+
 .card-address-header {
     margin: 0.5rem 0;
     font-weight: bold;
-}
-
-.card-address-icon {
-    color: #4CAF50;
-    margin-right: 0;
 }
 
 .card-cuisine-type {
@@ -96,7 +86,12 @@
     margin: 0;
 }
 
-.card-website-icon, .card-phone-icon {
+.card-address {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.card-website-icon, .card-phone-icon, .card-address-icon {
     color: #4CAF50;
     margin-right: 0.5rem;
 }

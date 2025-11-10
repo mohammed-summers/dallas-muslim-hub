@@ -127,6 +127,11 @@ public class CardFieldView extends VerticalLayout {
 
         descriptionContainer.add(description, expandButton);
 
+
+        Icon addressIcon = new Icon(VaadinIcon.MAP_MARKER);
+        addressIcon.addClassName("card-address-icon");
+
+
         // Address header and content
         String fullAddress = String.format("%s, %s, %s %s",
                 establishment.getAddress(),
@@ -135,16 +140,13 @@ public class CardFieldView extends VerticalLayout {
                 establishment.getZipCode()
         );
 
-        Icon addressIcon = new Icon(VaadinIcon.MAP_MARKER);
-        addressIcon.addClassName("card-address-icon");
-
         Paragraph address = new Paragraph(fullAddress);
         address.addClassName("card-address");
 
         HorizontalLayout addressLayout = new HorizontalLayout(addressIcon, address);
         addressLayout.setAlignItems(Alignment.CENTER);
         addressLayout.setSpacing(false);
-        addressLayout.addClassName("card-address-layout");
+        addressLayout.addClassName(".card-phone-number");
 
 
         // Website with icon
