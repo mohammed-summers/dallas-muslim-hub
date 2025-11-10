@@ -18,7 +18,7 @@ public class EstablishmentDto {
     private Integer id;
     private String name;
     private String category;
-    private String cuisineType;
+    private String cuisine;
     private String description;
     private String phoneNumber;
     private String website;

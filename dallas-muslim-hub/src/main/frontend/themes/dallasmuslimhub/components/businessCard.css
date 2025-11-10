@@ -36,11 +36,32 @@
 }
 
 .card-description {
+    margin: 0;
+    max-height: 3em;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.card-description.expanded {
+    max-height: 1000px;
+    transition: max-height 0.3s ease-in;
+}
+
+.expand-button {
+    color: black;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.9em;
+    cursor: pointer;
     margin-bottom: 1rem;
 }
 
 .card-address {
-    color: var(--lumo-secondary-text-color);
+    margin: 0;
+/*
+    padding-left: 1.5rem;
+*/
     font-size: 0.9em;
 }
 
@@ -57,4 +78,40 @@
 
 .card-actions vaadin-button:hover {
     background-color: rgba(76, 175, 80, 0.1);
+}
+
+.card-address-header {
+    margin: 0.5rem 0;
+    font-weight: bold;
+}
+
+.card-address-icon {
+    color: #4CAF50;
+    margin-right: 0;
+}
+
+.card-cuisine-type {
+    font-size: 0.8rem;
+    color: var(--lumo-secondary-text-color);
+    margin: 0;
+}
+
+.card-website-icon, .card-phone-icon {
+    color: #4CAF50;
+    margin-right: 0.5rem;
+}
+
+.card-website {
+    font-size: 0.9rem;
+    color: #4CAF50;
+    margin-top: 0.5rem;
+}
+
+.card-website a:where(:any-link){
+    color: black;
+}
+
+.card-phone-number {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
 }

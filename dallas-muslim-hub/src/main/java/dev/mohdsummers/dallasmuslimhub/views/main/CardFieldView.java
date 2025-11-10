@@ -1,10 +1,9 @@
 package dev.mohdsummers.dallasmuslimhub.views.main;
 
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.H3;
-import com.vaadin.flow.component.html.H4;
-import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -45,7 +44,7 @@ public class CardFieldView extends VerticalLayout {
             newEstablishment.setCity(cityField.getValue());
             newEstablishment.setState(stateField.getValue());
             newEstablishment.setZipCode(zipCodeField.getValue());
-            newEstablishment.setCuisineType(cuisineTypeField.getValue());
+            newEstablishment.setCuisine(cuisineTypeField.getValue());
 
             establishmentService.addEstablishment(newEstablishment);
             refreshCards();
@@ -101,26 +100,82 @@ public class CardFieldView extends VerticalLayout {
         H3 title = new H3(establishment.getName());
         title.addClassName("card-title");
 
-        H4 category = new H4(establishment.getCuisineType());
-        category.addClassName("card-category");
+        Paragraph cuisineType = new Paragraph(establishment.getCuisine());
+        cuisineType.addClassName("card-cuisine-type");
 
         // Create header
-        Div headerContainer = new Div(title, category);
+        Div headerContainer = new Div(title, cuisineType);
         headerContainer.addClassName("card-header");
 
-        // Description
+        // Description container
+        Div descriptionContainer = new Div();
         Paragraph description = new Paragraph(establishment.getDescription());
         description.addClassName("card-description");
 
-        // Address
+        Button expandButton = new Button("Show more");
+        expandButton.addClassName("expand-button");
+
+        expandButton.addClickListener(event -> {
+            if (description.hasClassName("expanded")) {
+                description.removeClassName("expanded");
+                expandButton.setText("Show more");
+            } else {
+                description.addClassName("expanded");
+                expandButton.setText("Show less");
+            }
+        });
+
+        descriptionContainer.add(description, expandButton);
+
+        // Address header and content
         String fullAddress = String.format("%s, %s, %s %s",
                 establishment.getAddress(),
                 establishment.getCity(),
                 establishment.getState(),
                 establishment.getZipCode()
         );
+
+        Icon addressIcon = new Icon(VaadinIcon.MAP_MARKER);
+        addressIcon.addClassName("card-address-icon");
+
         Paragraph address = new Paragraph(fullAddress);
         address.addClassName("card-address");
+
+        HorizontalLayout addressLayout = new HorizontalLayout(addressIcon, address);
+        addressLayout.setAlignItems(Alignment.CENTER);
+        addressLayout.setSpacing(false);
+        addressLayout.addClassName("card-address-layout");
+
+
+        // Website with icon
+        HorizontalLayout websiteLayout = new HorizontalLayout();
+        websiteLayout.setAlignItems(Alignment.CENTER);
+        websiteLayout.setSpacing(false);
+        websiteLayout.addClassName("card-website");
+
+        Icon websiteIcon = new Icon(VaadinIcon.GLOBE_WIRE);
+        websiteIcon.addClassName("card-website-icon");
+
+        Anchor websiteLink = new Anchor(establishment.getWebsite(), "Visit Website");
+        websiteLink.setTarget("_blank");
+
+        if (establishment.getWebsite() != null && !establishment.getWebsite().isEmpty()) {
+            websiteLayout.add(websiteIcon, websiteLink);
+        } else {
+            websiteLayout.add(websiteIcon, new Paragraph("Website not available"));
+        }
+
+        // Phone number with icon
+        HorizontalLayout phoneLayout = new HorizontalLayout();
+        phoneLayout.setAlignItems(Alignment.CENTER);
+        phoneLayout.setSpacing(false);
+        phoneLayout.addClassName("card-phone-number");
+
+        Icon phoneIcon = new Icon(VaadinIcon.PHONE);
+        phoneIcon.addClassName("card-phone-icon");
+
+        Paragraph phoneNumber = new Paragraph(establishment.getPhoneNumber() != null ? establishment.getPhoneNumber() : "Phone number not available");
+        phoneLayout.add(phoneIcon, phoneNumber);
 
         // Action buttons
         Button deleteButton = new Button("Delete", event -> {
@@ -133,7 +188,7 @@ public class CardFieldView extends VerticalLayout {
         actions.addClassName("card-actions");
 
         // Add everything to the card
-        card.add(headerContainer, description, address, actions);
+        card.add(headerContainer, descriptionContainer, addressLayout, websiteLayout, phoneLayout, actions);
         return card;
     }
 }
