@@ -28,31 +28,14 @@ public class CardFieldView extends VerticalLayout {
 
         // Create input fields
         TextField nameField = new TextField("Name");
-        TextField descriptionField = new TextField("Description");
-        TextField addressField = new TextField("Address");
-        TextField cityField = new TextField("City");
-        TextField stateField = new TextField("State");
-        TextField zipCodeField = new TextField("Zip Code");
         TextField cuisineTypeField = new TextField("Cuisine Type");
+        TextField cityField = new TextField("City");
+        TextField zipCodeField = new TextField("Zip Code");
 
-        // Create buttons
-        Button addButton = new Button("Add", event -> {
-            EstablishmentDto newEstablishment = new EstablishmentDto();
-            newEstablishment.setName(nameField.getValue());
-            newEstablishment.setDescription(descriptionField.getValue());
-            newEstablishment.setAddress(addressField.getValue());
-            newEstablishment.setCity(cityField.getValue());
-            newEstablishment.setState(stateField.getValue());
-            newEstablishment.setZipCode(zipCodeField.getValue());
-            newEstablishment.setCuisine(cuisineTypeField.getValue());
 
-            establishmentService.addEstablishment(newEstablishment);
-            refreshCards();
-            Notification.show("Establishment added!");
-        });
 
         Button filterButton = new Button("Filter", event -> {
-            if (nameField.isEmpty() && cuisineTypeField.isEmpty() && cityField.isEmpty() && stateField.isEmpty()) {
+            if (nameField.isEmpty() && cuisineTypeField.isEmpty() && cityField.isEmpty()) {
                 refreshCards();
                 return;
             }
@@ -60,20 +43,20 @@ public class CardFieldView extends VerticalLayout {
                     nameField.getValue(),
                     cuisineTypeField.getValue(),
                     cityField.getValue(),
-                    stateField.getValue()
+                    zipCodeField.getValue()
             );
             displayEstablishments(filteredEstablishments);
         });
 
         // Create layouts
         HorizontalLayout formLayout = new HorizontalLayout(
-                nameField, descriptionField, addressField, cityField,
-                stateField, zipCodeField, cuisineTypeField
+                nameField, cityField, zipCodeField, cuisineTypeField, filterButton
         );
-        HorizontalLayout buttonLayout = new HorizontalLayout(addButton, filterButton);
+        formLayout.setAlignItems(Alignment.END);
+//        HorizontalLayout buttonLayout = new HorizontalLayout(filterButton);
 
         // Add components
-        add(formLayout, buttonLayout, cardContainer);
+        add(formLayout, cardContainer);
 
         // Initial load
         refreshCards();

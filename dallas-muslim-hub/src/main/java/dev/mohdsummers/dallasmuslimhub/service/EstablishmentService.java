@@ -12,5 +12,5 @@ public interface EstablishmentService {
     String addEstablishment(EstablishmentDto establishmentDto);
     String updateEstablishment(EstablishmentDto establishmentDto);
     String deleteEstablishment(String restaurantName);
-    List<EstablishmentDto> filterEstablishment(String name, String cuisineType, String city, String state);
+    List<EstablishmentDto> filterEstablishment(String name, String cuisineType, String city, String zipCode);
 }

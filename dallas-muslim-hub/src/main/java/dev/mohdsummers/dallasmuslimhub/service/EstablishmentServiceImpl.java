@@ -61,13 +61,13 @@ public class EstablishmentServiceImpl implements EstablishmentService {
     }
 
     @Override
-    public List<EstablishmentDto> filterEstablishment(String name, String cuisineType, String city, String state) {
+    public List<EstablishmentDto> filterEstablishment(String name, String cuisineType, String city, String zipCode) {
         // Implement your filtering logic here
         return establishmentRepository.findAll().stream()
                 .filter(e -> (name == null || e.getName().contains(name)) &&
                         (cuisineType == null || e.getCuisine().equals(cuisineType)) &&
                         (city == null || e.getCity().equals(city)) &&
-                        (state == null || e.getState().equals(state)))
+                        (zipCode == null || e.getState().equals(zipCode)))
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
